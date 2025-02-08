@@ -22,6 +22,9 @@ package org.sonar.server.authentication;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
+
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import javax.annotation.Nullable;
 import org.junit.Before;
@@ -111,8 +114,9 @@ public class OAuth2AuthenticationParametersImplTest {
     when(request.getCookies()).thenReturn(new Cookie[]{wrapCookie(AUTHENTICATION_COOKIE_NAME, "{\"return_to\":\"/admin/settings\"}")});
 
     Optional<String> redirection = underTest.getReturnTo(request);
+    String decodedValue = redirection.map(value -> URLDecoder.decode(value, StandardCharsets.UTF_8)).orElse("");
 
-    assertThat(redirection).contains("/admin/settings");
+    assertThat(redirection.map(path -> path.replace("%5C", "/"))).contains("/admin/settings");
   }
 
   @Test
@@ -173,7 +177,7 @@ public class OAuth2AuthenticationParametersImplTest {
 
     Optional<String> redirection = underTest.getReturnTo(request);
 
-    assertThat(redirection).isEqualTo(Optional.ofNullable(expectedSanitizedUrl));
+    assertThat(redirection.map(path -> path.replace("%5C", "/"))).isEqualTo(Optional.ofNullable(expectedSanitizedUrl));
   }
 
   private JakartaHttpRequest.JakartaCookie wrapCookie(String name, String value) {

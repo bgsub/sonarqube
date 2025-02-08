@@ -22,6 +22,8 @@ package org.sonar.server.issue.ws.anticipatedtransition;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.server.component.ComponentTypeTree;
@@ -107,7 +109,9 @@ public class AnticipatedTransitionsActionIT {
     // given
     ProjectDto projectDto = mockProjectDto();
     mockUser(projectDto, ISSUE_ADMIN);
-    String requestBody = readTestResourceFile("request-with-transitions.json");
+    String path = readTestResourceFile("request-with-transitions.json");
+    String resourcePath = Paths.get(path).toString();
+    String requestBody = resourcePath;
 
     // when
     TestResponse response = getTestRequest(projectDto, requestBody).execute();
@@ -152,7 +156,11 @@ public class AnticipatedTransitionsActionIT {
     // given
     ProjectDto projectDto = mockProjectDto();
     mockUser(projectDto, ISSUE_ADMIN);
-    String requestBody = readTestResourceFile("request-with-transitions.json");
+    String path = readTestResourceFile("request-with-transitions.json");
+    String resourcePath = path
+            .substring(path.indexOf("resources/test/") + "resources/test/".length())
+            .replace('\\', '/');
+    String requestBody = resourcePath;
     TestResponse response1 = getTestRequest(projectDto, requestBody).execute();
     assertThat(anticipatedTransitionDao.selectByProjectUuid(db.getSession(), projectDto.getUuid())).hasSize(2);
     assertThat(response1.getStatus()).isEqualTo(202);
@@ -182,7 +190,12 @@ public class AnticipatedTransitionsActionIT {
     // given
     ProjectDto projectDto = mockProjectDto();
     mockUser(projectDto, ISSUE_ADMIN);
-    String requestBody = readTestResourceFile("request-with-transitions.json");
+    String path = readTestResourceFile("request-with-transitions.json");
+    String resourcePath = path
+            .substring(path.indexOf("resources/test/") + "resources/test/".length())
+            .replace('\\', '/');
+    String requestBody = resourcePath;
+
     TestResponse response1 = getTestRequest(projectDto, requestBody).execute();
     assertThat(anticipatedTransitionDao.selectByProjectUuid(db.getSession(), projectDto.getUuid())).hasSize(2);
     assertThat(response1.getStatus()).isEqualTo(202);
@@ -201,8 +214,11 @@ public class AnticipatedTransitionsActionIT {
     // given
     ProjectDto projectDto = mockProjectDto();
     mockUser(projectDto, CODEVIEWER);
-    String requestBody = readTestResourceFile("request-with-transitions.json");
-
+    String path = readTestResourceFile("request-with-transitions.json");
+    String resourcePath = path
+            .substring(path.indexOf("resources/test/") + "resources/test/".length())
+            .replace('\\', '/');
+    String requestBody = resourcePath;
     // when
     TestRequest request = getTestRequest(projectDto, requestBody);
 

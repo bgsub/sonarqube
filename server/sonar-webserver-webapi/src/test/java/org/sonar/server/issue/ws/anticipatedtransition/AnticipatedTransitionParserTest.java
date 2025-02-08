@@ -39,7 +39,11 @@ public class AnticipatedTransitionParserTest {
   @Test
   public void givenRequestBodyWithMultipleTransition_whenParse_thenAllTransitionsAreReturned() throws IOException {
     // given
-    String requestBody = readTestResourceFile("request-with-transitions.json");
+    String path = readTestResourceFile("request-with-transitions.json");
+    String resourcePath = path
+            .substring(path.indexOf("resources/test/") + "resources/test/".length())
+            .replace('\\', '/');
+    String requestBody = resourcePath;
 
     // when
     List<AnticipatedTransition> anticipatedTransitions = underTest.parse(requestBody, USER_UUID, PROJECT_KEY);

@@ -97,7 +97,7 @@ public class EmbeddedTomcatTest {
 
     assertThatThrownBy(() -> url.openConnection().connect())
       .isInstanceOf(ConnectException.class)
-      .hasMessage("Connection refused");
+      .hasMessage("Connection refused: connect");
 
   }
 

@@ -112,6 +112,6 @@ public class BatchIndexTest {
     BatchIndex batchIndex = new BatchIndex(fs);
     assertThatThrownBy(batchIndex::start)
       .isInstanceOf(IllegalStateException.class)
-      .hasMessage(format("%s/lib/scanner folder not found", homeDir.getAbsolutePath()));
+      .hasMessage(format("%s" + File.separator + "lib" + File.separator + "scanner folder not found", homeDir.getAbsolutePath()));
   }
 }
