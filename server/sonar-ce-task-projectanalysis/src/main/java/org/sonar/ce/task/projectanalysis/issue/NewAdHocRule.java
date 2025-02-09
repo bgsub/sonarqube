@@ -202,4 +202,20 @@ public class NewAdHocRule {
     return key.hashCode();
   }
 
+  @Override
+  public String toString() {
+    return "NewAdHocRule{" +
+            "key=" + key +
+            ", engineId='" + engineId + '\'' +
+            ", ruleId='" + ruleId + '\'' +
+            ", name='" + name + '\'' +
+            ", description='" + description + '\'' +
+            ", severity='" + severity + '\'' +
+            ", ruleType=" + ruleType +
+            ", hasDetails=" + hasDetails +
+            ", cleanCodeAttribute=" + cleanCodeAttribute +
+            ", defaultImpacts=" + defaultImpacts +
+            '}';
+  }
+
 }
