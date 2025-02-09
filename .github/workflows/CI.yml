@@ -37,9 +37,9 @@ jobs:
           docker pull sonarqube
           docker run -d -p 9000:9000 --name sonarqube sonarqube
 
-      - name: Wait for SonarQube to start
+      - name: Wait for Sonarqube to start
         run: sleep 30
 
-      - name: Check if SonarQube is running on docker
+      - name: Check if Sonarqube is running on docker
         run: |
           docker ps -q --filter "name=sonarqube"
