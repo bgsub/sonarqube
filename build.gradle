@@ -200,9 +200,9 @@ allprojects {
 apply plugin: 'org.sonarqube'
 sonar {
   properties {
-    property 'sonar.projectName', projectTitle
-    property 'sonar.projectVersion', "${versionInSources}-SNAPSHOT"
-    property 'sonar.buildString', version
+    property "sonar.projectKey", "bgsub_sonarqube"
+    property "sonar.organization", "bgsub"
+    property "sonar.host.url", "https://sonarcloud.io"
   }
 }
 
