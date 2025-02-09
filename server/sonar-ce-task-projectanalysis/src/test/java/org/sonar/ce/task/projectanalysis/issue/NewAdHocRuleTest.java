@@ -63,11 +63,13 @@ public class NewAdHocRuleTest {
             "key=external_eslint:no-cond-assign" +
             ", engineId='eslint'" +
             ", ruleId='no-cond-assign'" +
-            ", name=null" +
-            ", description=null" +
-            ", severity=null" +
+            ", name='null'" +
+            ", description='null'" +
+            ", severity='null'" +
             ", ruleType=null" +
             ", hasDetails=false" +
+            ", cleanCodeAttribute=CONVENTIONAL" +
+            ", defaultImpacts={MAINTAINABILITY=MEDIUM}"+
             "}";
     assertThat(result).isEqualTo(expectedValue);
   }
