@@ -1,4 +1,4 @@
-name: Java CI with Gradle
+name: TP1 - CI of Sonar by team Delta
 'on':
   push:
     branches:
@@ -40,6 +40,6 @@ jobs:
       - name: Wait for SonarQube to start
         run: sleep 30
 
-      - name: Check if SonarQube is running
+      - name: Check if SonarQube is running on docker
         run: |
           docker ps -q --filter "name=sonarqube"
