@@ -57,7 +57,10 @@ public class NewAdHocRuleTest {
 
   @Test
   public void test_tp1_new_function_new_ad_hoc_rule_to_string() {
-    NewAdHocRule adHocRule1 = new NewAdHocRule(ScannerReport.ExternalIssue.newBuilder().setEngineId("eslint").setRuleId("no-cond-assign").build());
+    NewAdHocRule adHocRule1 = new NewAdHocRule(ScannerReport.ExternalIssue.newBuilder()
+            .setEngineId("eslint")
+            .setRuleId("no-cond-assign")
+            .build());
     String result = adHocRule1.toString();
     String expectedValue = "NewAdHocRule{" +
             "key=external_eslint:no-cond-assign" +
